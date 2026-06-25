@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kos Matahari - Premium Resort & Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
+        :root {
+            --bg-beige: #F5E6D3;
+            --brand-pink: #D8A7B1;
+            --brand-pink-dark: #C4929C;
+            --white: #FFFFFF;
+            --text-dark: #4A3E3D;
+            --text-light: #8A7E7D;
+            --gray-light: #FAF6F0;
+            --success: #A8E6CF;
+            --success-text: #2C5E43;
+            --danger: #FFD3B6;
+            --danger-text: #8A4F35;
+            --shadow: 0 4px 20px rgba(74, 62, 61, 0.06);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* Flower Theme Colors */
+            --c-mawar: #E57373;
+            --c-melati: #90A4AE;
+            --c-lily: #BA68C8;
+            --c-edelweiss: #D4AF37;
+            --c-anggrek: #F06292;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- LOGO MATAHARI --- */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            user-select: none;
+        }
+        .premium-sun-icon {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sun-rays {
+            position: absolute;
+            color: #F4B251;
+            font-size: 2.2rem;
+            animation: rotateSun 25s linear infinite;
+        }
+        .sun-center {
+            position: absolute;
+            color: #F19E38;
+            font-size: 1.3rem;
+            z-index: 2;
+            filter: drop-shadow(0 0 4px rgba(241, 158, 56, 0.6));
+        }
+        @keyframes rotateSun {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- NAVIGATION --- */
+        .public-navbar {
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid #EFEAE4;
+        }
+        .public-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(45deg, var(--text-dark), var(--brand-pink-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .public-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+        }
+        .public-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .public-menu a:hover { color: var(--brand-pink-dark); }
+
+        /* --- FILTER BUTTONS --- */
+        .block-filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 1.5rem 0 2.5rem 0;
+            flex-wrap: wrap;
+        }
+        .btn-filter-flower {
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #EFEAE4;
+            background-color: var(--white);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .btn-filter-flower.active, .btn-filter-flower:hover {
+            background-color: var(--text-dark);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-beige) 0%, var(--gray-light) 100%);
+            border-bottom: 1px solid rgba(216, 167, 177, 0.2);
+        }
+        .hero-banner h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+        .hero-banner p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* --- PUBLIC CARD LAYOUT --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .section-title { font-size: 1.6rem; font-weight: 600; margin-bottom: 1.5rem; position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 40px; height: 3px; background-color: var(--brand-pink-dark); }
+
+        .public-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
+        }
+        .kamar-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #EFEAE4;
+            transition: var(--transition);
+            position: relative;
+        }
+        .kamar-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        
+        .kamar-card-img-wrapper {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            background-color: #EFEAE4;
+            position: relative;
+        }
+        .kamar-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .kamar-card:hover .kamar-card-img-wrapper img { transform: scale(1.08); }
+        
+        .kamar-card-body { padding: 1.25rem; }
+        .kamar-price { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 0.3rem 0; }
+
+        .pub-contact-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+        .pub-contact-list li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* --- FORMS & WORKSPACE PANELS --- */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(74, 62, 61, 0.4); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: center; z-index: 9999;
+        }
+        .login-card { background: var(--white); padding: 2.5rem; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; }
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+        .form-control {
+            width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #EFEAE4;
+            border-radius: 10px; font-size: 0.9rem; background-color: var(--gray-light);
+        }
+        .form-control:focus { outline: none; border-color: var(--brand-pink-dark); }
+        
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center; transition: var(--transition); }
+        .btn-primary { background-color: var(--brand-pink); color: var(--white); }
+        .btn-primary:hover { background-color: var(--brand-pink-dark); }
+        .btn-add { background-color: var(--bg-beige); color: var(--text-dark); font-size: 0.85rem; }
+
+        /* --- DASHBOARD ADMIN LAYOUT --- */
+        #admin-workspace { display: none; width: 100%; min-height: 100vh; }
+        aside {
+            position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background-color: var(--white); border-right: 1.5px solid #EFEAE4; display: flex; flex-direction: column; z-index: 100;
+        }
+        .sidebar-menu { list-style: none; padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+        .sidebar-menu li a {
+            display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; color: var(--text-light); text-decoration: none; border-radius: 10px; font-size: 0.9rem; font-weight: 500;
+        }
+        .sidebar-menu li:hover a, .sidebar-menu li.active a { background-color: var(--bg-beige); color: var(--text-dark); }
+        
+        main { margin-left: 260px; width: calc(100% - 260px); min-height: 100vh; }
+        header {
+            height: 70px; background-color: var(--white); border-bottom: 1.5px solid #EFEAE4; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; position: sticky; top: 0; z-index: 90;
+        }
+        .content-body { padding: 2rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+        .stat-card { background-color: var(--white); padding: 1.25rem; border-radius: 16px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; border: 1px solid #EFEAE4; }
+        .stat-info h3 { font-size: 0.8rem; color: var(--text-light); font-weight: 500; }
+        .stat-info p { font-size: 1.35rem; font-weight: 700; }
+        .stat-icon { width: 44px; height: 44px; border-radius: 12px; background-color: var(--gray-light); display: flex; justify-content: center; align-items: center; font-size: 1.15rem; color: var(--brand-pink-dark); }
+        .card-panel { background-color: var(--white); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; border: 1px solid #EFEAE4; }
+        
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+        th { background-color: var(--gray-light); padding: 0.85rem; border-bottom: 2px solid #EFEAE4; font-weight: 600; }
+        td { padding: 0.85rem; border-bottom: 1px solid #EFEAE4; vertical-align: middle; }
+        .badge { padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; }
+        .badge-success { background-color: var(--success); color: var(--success-text); }
+        .badge-danger { background-color: var(--danger); color: var(--danger-text); }
+
+        .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap; }
+        .btn-action { padding: 0.4rem 0.7rem; font-size: 0.75rem; border-radius: 6px; border: none; cursor: pointer; }
+        .btn-edit { background-color: #E2ECF8; color: #3A6494; margin-right: 4px; }
+        .btn-delete { background-color: #FCE8E6; color: #A8372B; }
+
+        /* Chart Dashboard */
+        .chart-box { display: flex; align-items: flex-end; justify-content: space-between; height: 140px; border-bottom: 2px solid #EFEAE4; padding-top: 1rem;}
+        .chart-bar-container { display: flex; flex-direction: column; align-items: center; flex: 1; }
+        .chart-bar-fill { width: 40%; background-color: var(--brand-pink); border-radius: 4px 4px 0 0; position: relative; }
+        .chart-bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 600; }
+        .chart-bar-lbl { font-size: 0.7rem; margin-top: 6px; color: var(--text-light); }
+
+        /* Modal Area */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); z-index: 1000; display: none; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background-color: var(--white); padding: 2rem; border-radius: 16px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
+        .modal-close-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-light); }
+
+        .announcement-item { border-left: 4px solid var(--brand-pink); padding: 1rem; background-color: var(--gray-light); border-radius: 0 12px 12px 0; margin-bottom: 1rem; }
+        .avatar-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background-color: var(--bg-beige); }
+
+        .page-section { display: none; animation: viewFade 0.3s ease; }
+        .page-section.active { display: block; }
+        @keyframes viewFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .public-menu { display: none; }
+            aside { display: none; }
+            main { margin-left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="public-view">
+        <nav class="public-navbar">
+            <div class="logo-wrapper">
+                <div class="premium-sun-icon">
+                    <i class="fa-solid fa-sun-plant-wilt sun-rays"></i>
+                    <i class="fa-solid fa-sun sun-center"></i>
+                </div>
+                <span class="public-logo-text" id="p-logo-txt">Kos Matahari Resort</span>
+            </div>
+            <ul class="public-menu">
+                <li><a href="#kamar-pilihan">Katalog Kamar</a></li>
+                <li><a href="#papan-informasi">Pengumuman</a></li>
+                <li><a href="#profil-kosan">Tentang Kami</a></li>
+                <li><button class="btn btn-primary" onclick="toggleLogin(true)" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-circle-user"></i> Dashboard Admin</button></li>
+            </ul>
+        </nav>
+
+        <section class="hero-banner">
+            <h1 id="p-hero-title">Temukan Kenyamanan Terbaik di Kos Matahari Resort</h1>
+            <p id="p-hero-desc">Nikmati pengalaman tinggal yang nyaman dengan fasilitas modern, lingkungan yang bersih, serta sistem keamanan 24 jam. Kos Matahari Resort menawarkan 100 kamar eksklusif yang dirancang untuk menunjang kebutuhan mahasiswa maupun pekerja profesional.</p>
+        </section>
+
+        <div class="container">
+            <div id="kamar-pilihan">
+                <h2 class="section-title">Eksplorasi Blok Kamar Tersedia</h2>
+                <div class="block-filter-container">
+                    <button class="btn-filter-flower active" onclick="filterPublicBlock('Semua', this)">Semua Blok (100 Kamar)</button>
+                    <button class="btn-filter-flower" onclick="filterPublicBlock('Mawar', this)">Blok Mawar</button>
+                    <button class="btn-filter-flower" onclick="filterPublicBlock('Melati', this)">Blok Melati</button>
+                    <button class="btn-filter-flower" onclick="filterPublicBlock('Lily', this)">Blok Lily</button>
+                    <button class="btn-filter-flower" onclick="filterPublicBlock('Edelweiss', this)">Blok Edelweiss</button>
+                    <button class="btn-filter-flower" onclick="filterPublicBlock('Anggrek', this)">Blok Anggrek</button>
+                </div>
+                
+                <div class="public-grid" id="pub-rooms-list"></div>
+            </div>
+
+            <div id="papan-informasi" style="margin-bottom: 3.5rem;">
+                <h2 class="section-title">Papan Informasi Memo</h2>
+                <div id="pub-announcements"></div>
+            </div>
+
+            <div id="profil-kosan" class="card-panel">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h3 style="color: var(--brand-pink-dark); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-location-dot"></i> Hubungi Manajemen</h3>
+                        <p id="p-address" style="margin-bottom: 6px; font-size: 0.9rem;"><i class="fa-solid fa-location-pin"></i> Alamat: Jl. Cempaka Indah No. 45, Jakarta Selatan</p>
+                        
+                        <p style="font-size: 0.9rem; font-weight: 600;"><i class="fa-solid fa-square-phone"></i> Kontak Admin:</p>
+                        <ul class="pub-contact-list" id="p-contact-list">
+                            <li id="p-contact-nadia">📞 0812-3456-7890 (Putri Nabila)</li>
+                            <li id="p-contact-tesa">📞 0812-8630-9833 (Tesa Antika)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Struktur Manajemen Kos</h3>
+                        <p id="p-structure-text" style="font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-top: 5px;">
+                            Kos Matahari Resort merupakan hunian modern berkapasitas 100 kamar premium yang dirancang khusus dalam 5 zona klaster bunga eksotis. Demi menjamin kenyamanan maksimal, setiap kamar telah dilengkapi dengan fasilitas Smart TV berkoneksi internet cepat untuk kebutuhan hiburan dan streaming Anda, didukung oleh manajemen profesional yang mengutamakan keamanan serta privasi hunian.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-overlay">
+        <div class="login-card">
+            <div class="logo-wrapper" style="justify-content: center; margin-bottom: 1rem;">
+                <div class="premium-sun-icon">
+                    <i class="fa-solid fa-sun-plant-wilt sun-rays"></i>
+                    <i class="fa-solid fa-sun sun-center"></i>
+                </div>
+            </div>
+            <h2 style="font-size: 1.3rem;">Sistem Autentikasi Admin</h2>
+            <p style="color: var(--text-light); font-size: 0.8rem; margin-bottom: 1.5rem;">Kelola data operasional internal 100 kamar kos</p>
+            <form id="auth-form">
+                <div class="form-group"><label>Username</label><input type="text" id="auth-user" class="form-control" required value="admin"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="auth-pass" class="form-control" required value="admin123"></div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" class="btn" style="background-color: var(--gray-light); width: 50%;" onclick="toggleLogin(false)">Batal</button>
+                    <button type="submit" class="btn btn-primary" style="width: 50%;">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-workspace">
+        <aside>
+            <div style="padding: 1.5rem; border-bottom: 1px solid #EFEAE4;" class="logo-wrapper">
+                <div class="premium-sun-icon">
+                    <i class="fa-solid fa-sun-plant-wilt sun-rays"></i>
+                    <i class="fa-solid fa-sun sun-center"></i>
+                </div>
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--text-dark);">Core Admin</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active" data-section="sec-dash"><a href="#"><i class="fa-solid fa-chart-simple"></i> Dashboard</a></li>
+                <li data-section="sec-kamar"><a href="#"><i class="fa-solid fa-door-closed"></i> Data Kamar (100)</a></li>
+                <li data-section="sec-penghuni"><a href="#"><i class="fa-solid fa-id-card"></i> Data Penghuni</a></li>
+                <li data-section="sec-bayar"><a href="#"><i class="fa-solid fa-money-check-dollar"></i> Pembayaran</a></li>
+                <li data-section="sec-laporan"><a href="#"><i class="fa-solid fa-print"></i> Modul Laporan</a></li>
+                <li data-section="sec-info"><a href="#"><i class="fa-solid fa-bullhorn"></i> Pengumuman</a></li>
+                <li data-section="sec-profil"><a href="#"><i class="fa-solid fa-sliders"></i> Profil Kos</a></li>
+            </ul>
+            <button class="btn" style="margin: auto 1rem 1rem; background-color: #FCE8E6; color: #A8372B; font-size: 0.8rem;" id="admin-logout-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar Dashboard
+            </button>
+        </aside>
+
+        <main>
+            <header>
+                <div><h2 id="section-view-title" style="font-size: 1.25rem; font-weight: 600;">Dashboard Ringkasan</h2></div>
+                <div style="font-size: 0.85rem; color: var(--text-light); font-weight: 500;"><i class="fa-solid fa-unlock-keyhole"></i> Mode Pengelola Aktif</div>
+            </header>
+
+            <div class="content-body">
+                
+                <div id="sec-dash" class="page-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card"><div class="stat-info"><h3>Total Kamar</h3><p id="sd-tk">100</p></div><div class="stat-icon"><i class="fa-solid fa-hotel"></i></div></div>
+                        <div class="stat-card"><div class="stat-info"><h3>Kamar Terisi</h3><p id="sd-ti" style="color: var(--success-text);">0</p></div><div class="stat-icon" style="background-color: var(--success);"><i class="fa-solid fa-user-check"></i></div></div>
+                        <div class="stat-card"><div class="stat-info"><h3>Kamar Kosong</h3><p id="sd-ko" style="color: var(--danger-text);">0</p></div><div class="stat-icon" style="background-color: var(--danger);"><i class="fa-solid fa-door-open"></i></div></div>
+                        <div class="stat-card"><div class="stat-info"><h3>Total Penghuni</h3><p id="sd-tp">0</p></div><div class="stat-icon"><i class="fa-solid fa-users-rectangle"></i></div></div>
+                    </div>
+                    <div class="stats-grid" style="grid-template-columns: 1fr 2fr;">
+                        <div class="card-panel">
+                            <h3>Pemasukan Bulan Ini</h3>
+                            <p style="font-size: 1.6rem; font-weight: 700; color: var(--brand-pink-dark); margin: 0.5rem 0;" id="sd-cuan">Rp 0</p>
+                            <span style="font-size: 0.75rem; color: var(--text-light);"><i class="fa-solid fa-circle-nodes"></i> Akumulasi dari sistem invoice</span>
+                        </div>
+                        <div class="card-panel">
+                            <h3>Statistik Pendapatan Bulanan (M=Juta)</h3>
+                            <div class="chart-box">
+                                <div class="chart-bar-container"><div class="chart-bar-fill" style="height: 45%;"><span class="chart-bar-val">12M</span></div><span class="chart-bar-lbl">April</span></div>
+                                <div class="chart-bar-container"><div class="chart-bar-fill" style="height: 65%;"><span class="chart-bar-val">18M</span></div><span class="chart-bar-lbl">Mei</span></div>
+                                <div class="chart-bar-container"><div class="chart-bar-fill" style="height: 85%; background-color: var(--brand-pink-dark);"><span class="chart-bar-val" id="chart-c-val">0</span></div><span class="chart-bar-lbl">Juni</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sec-kamar" class="page-section">
+                    <div class="action-bar">
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="text" id="src-kamar" class="form-control" placeholder="Cari nama kamar/blok..." style="max-width: 220px; padding:0.5rem;">
+                            <select id="filter-block-admin" class="form-control" style="max-width: 150px; padding:0.5rem;" onchange="renderKamarTable()">
+                                <option value="Semua">Semua Blok</option>
+                                <option value="Mawar">Mawar</option>
+                                <option value="Melati">Melati</option>
+                                <option value="Lily">Lily</option>
+                                <option value="Edelweiss">Edelweiss</option>
+                                <option value="Anggrek">Anggrek</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-add" onclick="openCrudForm('kamar')"><i class="fa-solid fa-square-plus"></i> Tambah Kamar Mandiri</button>
+                    </div>
+                    <div class="card-panel table-responsive">
+                        <table>
+                            <thead><tr><th>Foto Preview</th><th>Nama/No Kamar</th><th>Blok Klaster</th><th>Tipe Kamar</th><th>Harga Sewa /Bulan</th><th>Status Operasional</th><th>Aksi Data</th></tr></thead>
+                            <tbody id="tbody-kamar"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="sec-penghuni" class="page-section">
+                    <div class="action-bar">
+                        <input type="text" id="src-penghuni" class="form-control" placeholder="Cari nama penghuni..." style="max-width: 250px;">
+                        <button class="btn btn-primary btn-add" onclick="openCrudForm('penghuni')"><i class="fa-solid fa-user-plus"></i> Daftarkan Penghuni</button>
+                    </div>
+                    <div class="card-panel table-responsive">
+                        <table>
+                            <thead><tr><th>Foto</th><th>Nama Penghuni</th><th>Nomor HP</th><th>Jenis Kelamin</th><th>Nama Kamar</th><th>Tanggal Masuk</th><th>Aksi Data</th></tr></thead>
+                            <tbody id="tbody-penghuni"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="sec-bayar" class="page-section">
+                    <div class="action-bar">
+                        <input type="text" id="src-bayar" class="form-control" placeholder="Cari transaksi..." style="max-width: 250px;">
+                        <button class="btn btn-primary btn-add" onclick="openCrudForm('bayar')"><i class="fa-solid fa-file-invoice-dollar"></i> Catat Pembayaran</button>
+                    </div>
+                    <div class="card-panel table-responsive">
+                        <table>
+                            <thead><tr><th>Nama Penghuni</th><th>Kamar</th><th>Bulan Pembayaran</th><th>Nominal Transaksi</th><th>Status Verifikasi</th><th>Bukti Bayar</th><th>Aksi Data</th></tr></thead>
+                            <tbody id="tbody-bayar"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="sec-laporan" class="page-section">
+                    <div class="action-bar">
+                        <h3>Berkas Dokumen Pelaporan Valid</h3>
+                        <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Cetak Dokumen PDF</button>
+                    </div>
+                    <div class="card-panel" style="background-color: var(--white); max-width: 700px; margin: 0 auto; padding: 2.5rem; border:1px solid #dcd6ce;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <h2 style="font-weight: 700; letter-spacing: 1px;">LAPORAN BULANAN KOS MATAHARI</h2>
+                            <p style="color: var(--text-light); font-size: 0.85rem;">Dokumen Manajerial Akuntansi Terpusat</p>
+                        </div>
+                        <hr style="border: 1px dashed #EFEAE4; margin-bottom: 2rem;">
+                        <div style="display: flex; flex-direction: column; gap: 20px; font-size: 0.95rem;">
+                            <div style="display: flex; justify-content: space-between;"><span>Total Pemasukan Finansial:</span><strong id="lap-val-pemasukan" style="color: var(--brand-pink-dark);">Rp 0</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Jumlah Penghuni Aktif:</span><strong id="lap-val-penghuni">0 Orang</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Jumlah Kamar Kosong Tersedia:</span><strong id="lap-val-kosong">0 Kamar</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sec-info" class="page-section">
+                    <div class="action-bar">
+                        <h3>Daftar Informasi / Memo Rilis</h3>
+                        <button class="btn btn-primary btn-add" onclick="openCrudForm('info')"><i class="fa-solid fa-plus"></i> Buat Pengumuman</button>
+                    </div>
+                    <div class="card-panel" id="admin-info-list"></div>
+                </div>
+
+                <div id="sec-profil" class="page-section">
+                    <div class="card-panel" style="max-width: 600px;">
+                        <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-pen-to-square"></i> Konfigurasi Identitas Utama</h3>
+                        <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:15px;">Gunakan tombol konfigurasi dasar di bawah untuk mengubah nama kos, alamat, deskripsi struktur manajemen, serta nomor kontak secara langsung dan aman.</p>
+                        <button class="btn btn-primary" onclick="openCrudForm('profil')"><i class="fa-solid fa-gear"></i> Buka Pengaturan Profil Kos</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="crud-modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #EFEAE4; padding-bottom: 0.5rem;">
+                <h3 id="modal-form-title">Form Isian</h3>
+                <button class="modal-close-btn" onclick="closeCrudForm()">&times;</button>
+            </div>
+            <form id="dynamic-form-core">
+                <input type="hidden" id="form-target-type">
+                <input type="hidden" id="form-target-id">
+                <div id="dynamic-fields-container"></div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 2rem;">
+                    <button type="button" class="btn" style="background-color: var(--gray-light);" onclick="closeCrudForm()">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const defaultRoomImage = "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=500&q=80";
+
+        function generateDefault100Kamar() {
+            let list = [];
+            const blocks = ['Mawar', 'Melati', 'Lily', 'Edelweiss', 'Anggrek'];
+            let count = 1;
+            
+            blocks.forEach(block => {
+                for (let i = 1; i <= 20; i++) {
+                    let hargaSewa = block === 'Lily' || block === 'Edelweiss' ? 1800000 : 1400000;
+                    let statusSewa = (i === 3 || i === 7) ? 'Terisi' : 'Kosong';
+                    
+                    list.push({
+                        id: 'k-' + count,
+                        nomor: `${block} ${i}`,
+                        blok: block,
+                        tipe: i <= 10 ? 'Standard Resort Suite' : 'Deluxe Balcony Room',
+                        harga: hargaSewa,
+                        status: statusSewa,
+                        foto: "" 
+                    });
+                    count++;
+                }
+            });
+            return list;
+        }
+
+        const seedPenghuni = [
+            { id: "p-1", nama: "Reza Rahadian", hp: "081255443322", gender: "Pria", kamar: "Mawar 3", masuk: "2026-01-15", foto: "" },
+            { id: "p-2", nama: "Chelsea Islan", hp: "089966778899", gender: "Wanita", kamar: "Lily 7", masuk: "2026-03-01", foto: "" }
+        ];
+        const seedBayar = [
+            { id: "b-1", penghuni: "Reza Rahadian", kamar: "Mawar 3", bulan: "Juni 2026", nominal: 1400000, status: "Lunas", bukti: "M-Banking BCA" },
+            { id: "b-2", penghuni: "Chelsea Islan", kamar: "Lily 7", bulan: "Juni 2026", nominal: 1800000, status: "Lunas", bukti: "Transfer QRIS Mandiri" }
+        ];
+        const seedInfo = [
+            { id: "i-1", judul: "Informasi Sistem Papan Memo", isi: "Saat ini belum ada pengumuman terbaru. Semua informasi penting terkait operasional kos, jadwal perawatan fasilitas, atau agenda bersama akan dirilis di papan memo ini." }
+        ];
+        const seedProfil = {
+            nama: "Kos Matahari Resort",
+            alamat: "Jl. Cempaka Indah No. 45, Jakarta Selatan",
+            nadia: "0812-3456-7890 (Putri Nabila)",
+            tesa: "0812-8630-9833 (Tesa Antika)",
+            desc: "Kos Matahari Resort merupakan hunian modern berkapasitas 100 kamar premium yang dirancang khusus dalam 5 zona klaster bunga eksotis. Demi menjamin kenyamanan maksimal, setiap kamar telah dilengkapi dengan fasilitas Smart TV yang terhubung langsung ke jaringan Wi-Fi High-Speed Dedicated Internet (up to 100 Mbps) menggunakan infrastruktur serat optik (Fiber Optic). Jaringan ini menjamin koneksi yang stabil, bebas buffering untuk kebutuhan streaming 4K, cloud conferencing, game online, hingga mendukung produktivitas WFH (Work From Home) dan tugas kuliah Anda tanpa batasan kuota (unlimited bandwidth). Seluruh area hunian juga didukung oleh manajemen profesional dengan sistem keamanan terpadu 24 jam menggunakan akses Smart Door Lock, jajaran CCTV di setiap sudut koridor, serta jaminan privasi tinggi yang tenang dan eksklusif."
+        };
+
+        let storage = {
+            kamar: JSON.parse(localStorage.getItem('km100_rooms')) || generateDefault100Kamar(),
+            penghuni: JSON.parse(localStorage.getItem('km100_users')) || seedPenghuni,
+            bayar: JSON.parse(localStorage.getItem('km100_bills')) || seedBayar,
+            info: JSON.parse(localStorage.getItem('km100_news')) || seedInfo,
+            profil: JSON.parse(localStorage.getItem('km100_profile')) || seedProfil
+        };
+
+        let activePublicBlockFilter = 'Semua';
+
+        function commit() {
+            localStorage.setItem('km100_rooms', JSON.stringify(storage.kamar));
+            localStorage.setItem('km100_users', JSON.stringify(storage.penghuni));
+            localStorage.setItem('km100_bills', JSON.stringify(storage.bayar));
+            localStorage.setItem('km100_news', JSON.stringify(storage.info));
+            localStorage.setItem('km100_profile', JSON.stringify(storage.profil));
+            refreshViews();
+        }
+
+        function toggleLogin(show) { document.getElementById('login-overlay').style.display = show ? 'flex' : 'none'; }
+        
+        document.getElementById('auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(document.getElementById('auth-user').value === "admin" && document.getElementById('auth-pass').value === "admin123") {
+                toggleLogin(false);
+                document.getElementById('public-view').style.display = 'none';
+                document.getElementById('admin-workspace').style.display = 'flex';
+                refreshViews();
+            } else { alert('Password / Username Pengelola Luput!'); }
+        });
+
+        document.getElementById('admin-logout-btn').addEventListener('click', function() {
+            document.getElementById('admin-workspace').style.display = 'none';
+            document.getElementById('public-view').style.display = 'block';
+            refreshViews();
+        });
+
+        const menuItems = document.querySelectorAll('.sidebar-menu li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuItems.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-section')).classList.add('active');
+                document.getElementById('section-view-title').innerText = this.textContent.trim();
+            });
+        });
+
+        function rupiah(num) { return 'Rp ' + parseInt(num).toLocaleString('id-ID'); }
+
+        function filterPublicBlock(blockName, btnElement) {
+            document.querySelectorAll('.btn-filter-flower').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            activePublicBlockFilter = blockName;
+            renderPublicView();
+        }
+
+        function refreshViews() {
+            renderPublicView();
+            renderAdminDashboard();
+            renderKamarTable();
+            renderPenghuniTable();
+            renderBayarTable();
+            renderLaporanPage();
+            renderInfoPage();
+        }
+
+        function renderPublicView() {
+            document.getElementById('p-logo-txt').innerText = storage.profil.nama;
+            document.getElementById('p-address').innerHTML = `<i class="fa-solid fa-location-pin"></i> Alamat: ${storage.profil.alamat}`;
+            document.getElementById('p-structure-text').innerText = storage.profil.desc;
+            document.getElementById('p-contact-nadia').innerText = `📞 ${storage.profil.nadia}`;
+            document.getElementById('p-contact-tesa').innerText = `📞 ${storage.profil.tesa}`;
+
+            let cardHtml = '';
+            let filteredRooms = storage.kamar.filter(k => k.status === 'Kosong');
+            
+            if(activePublicBlockFilter !== 'Semua') {
+                filteredRooms = filteredRooms.filter(k => k.blok === activePublicBlockFilter);
+            }
+
+            filteredRooms.forEach(k => {
+                let imgSource = k.foto ? k.foto : defaultRoomImage;
+                cardHtml += `
+                    <div class="kamar-card">
+                        <div class="kamar-card-img-wrapper">
+                            <img src="${imgSource}" alt="Kamar ${k.nomor}">
+                        </div>
+                        <div class="kamar-card-body">
+                            <span style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color: var(--brand-pink-dark);">Klaster ${k.blok}</span>
+                            <h3 style="margin-top:2px;">Kamar ${k.nomor}</h3>
+                            <p style="font-size:0.8rem; color:var(--text-light);">${k.tipe}</p>
+                            <div class="kamar-price">${rupiah(k.harga)}<span style="font-size:0.75rem; font-weight:normal; color:var(--text-light);">/bln</span></div>
+                            <span class="badge badge-success" style="margin-top:6px; display:inline-block;"><i class="fa-solid fa-circle-check"></i> Tersedia Ready</span>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('pub-rooms-list').innerHTML = cardHtml || `
+                <p style="color:var(--text-light); padding:1rem;">Tidak ada kamar kosong yang tersedia di Blok ${activePublicBlockFilter}.</p>
+            `;
+
+            let infoHtml = '';
+            storage.info.forEach(i => {
+                infoHtml += `
+                    <div class="announcement-item">
+                        <h4><i class="fa-solid fa-bell"></i> ${i.judul}</h4>
+                        <p style="font-size:0.85rem; margin-top:4px; color:var(--text-dark);">${i.isi}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('pub-announcements').innerHTML = infoHtml || '<p style="color:var(--text-light)">Tidak ada info memo rilis.</p>';
+        }
+
+        function renderAdminDashboard() {
+            const tk = storage.kamar.length;
+            const ti = storage.kamar.filter(k => k.status === 'Terisi').length;
+            const ko = tk - ti;
+            document.getElementById('sd-tk').innerText = tk;
+            document.getElementById('sd-ti').innerText = ti;
+            document.getElementById('sd-ko').innerText = ko;
+            document.getElementById('sd-tp').innerText = storage.penghuni.length;
+
+            const totalIncome = storage.bayar.filter(b => b.status === 'Lunas').reduce((acc, curr) => acc + curr.nominal, 0);
+            document.getElementById('sd-cuan').innerText = rupiah(totalIncome);
+            document.getElementById('chart-c-val').innerText = (totalIncome / 1000000).toFixed(1) + "M";
+        }
+
+        function renderKamarTable() {
+            let filterTxt = document.getElementById('src-kamar').value.toLowerCase();
+            let filterBlk = document.getElementById('filter-block-admin').value;
+            let html = '';
+
+            let matched = storage.kamar;
+            if(filterBlk !== 'Semua') matched = matched.filter(k => k.blok === filterBlk);
+            if(filterTxt) matched = matched.filter(k => k.nomor.toLowerCase().includes(filterTxt) || k.tipe.toLowerCase().includes(filterTxt));
+
+            matched.forEach(k => {
+                let imgSource = k.foto ? k.foto : defaultRoomImage;
+                html += `<tr>
+                    <td><img src="${imgSource}" style="width:70px; height:45px; object-fit:cover; border-radius:6px; border:1px solid #ddd;"></td>
+                    <td><strong>Kamar ${k.nomor}</strong></td>
+                    <td><span class="badge" style="background-color:var(--gray-light); color:var(--text-dark); border:1px solid #e1dbd3;">Blok ${k.blok}</span></td>
+                    <td>${k.tipe}</td>
+                    <td>${rupiah(k.harga)}</td>
+                    <td><span class="badge ${k.status==='Terisi'?'badge-success':'badge-danger'}">${k.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editRecord('kamar','${k.id}')"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn-action btn-delete" onclick="deleteRecord('kamar','${k.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('tbody-kamar').innerHTML = html || '<tr><td colspan="7">Data kamar tidak ditemukan</td></tr>';
+        }
+
+        function renderPenghuniTable() {
+            let filterTxt = document.getElementById('src-penghuni').value.toLowerCase();
+            let html = '';
+            let matched = storage.penghuni.filter(p => p.nama.toLowerCase().includes(filterTxt));
+
+            matched.forEach(p => {
+                const imgUrl = p.foto ? p.foto : `https://api.dicebear.com/7.x/initials/svg?seed=${p.nama}`;
+                html += `<tr>
+                    <td><img src="${imgUrl}" class="avatar-img"></td>
+                    <td><strong>${p.nama}</strong></td>
+                    <td>${p.hp}</td>
+                    <td>${p.gender}</td>
+                    <td><span style="font-weight:600;"><i class="fa-solid fa-door-closed"></i> ${p.kamar}</span></td>
+                    <td>${p.masuk}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editRecord('penghuni','${p.id}')"><i class="fa-solid fa-user-gear"></i></button>
+                        <button class="btn-action btn-delete" onclick="deleteRecord('penghuni','${p.id}')"><i class="fa-solid fa-user-minus"></i></button>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('tbody-penghuni').innerHTML = html || '<tr><td colspan="7">Data penghuni tidak ditemukan</td></tr>';
+        }
+
+        function renderBayarTable() {
+            let filterTxt = document.getElementById('src-bayar').value.toLowerCase();
+            let html = '';
+            let matched = storage.bayar.filter(b => b.penghuni.toLowerCase().includes(filterTxt) || b.kamar.toLowerCase().includes(filterTxt));
+
+            matched.forEach(b => {
+                html += `<tr>
+                    <td><strong>${b.penghuni}</strong></td>
+                    <td><strong>${b.kamar}</strong></td>
+                    <td>${b.bulan}</td>
+                    <td>${rupiah(b.nominal)}</td>
+                    <td><span class="badge badge-success">${b.status}</span></td>
+                    <td><small style="color:var(--text-light)"><i class="fa-solid fa-receipt"></i> ${b.bukti}</small></td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editRecord('bayar','${b.id}')"><i class="fa-solid fa-signature"></i></button>
+                        <button class="btn-action btn-delete" onclick="deleteRecord('bayar','${b.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('tbody-bayar').innerHTML = html || '<tr><td colspan="7">Data billing tidak ditemukan</td></tr>';
+        }
+
+        function renderLaporanPage() {
+            const income = storage.bayar.filter(b => b.status === 'Lunas').reduce((acc, curr) => acc + curr.nominal, 0);
+            const kosong = storage.kamar.filter(k => k.status === 'Kosong').length;
+            document.getElementById('lap-val-pemasukan').innerText = rupiah(income);
+            document.getElementById('lap-val-penghuni').innerText = storage.penghuni.length + " Orang";
+            document.getElementById('lap-val-kosong').innerText = kosong + " Kamar";
+        }
+
+        function renderInfoPage() {
+            let html = '';
+            storage.info.forEach(i => {
+                html += `<div class="announcement-item">
+                    <h4>${i.judul}</h4>
+                    <p style="font-size:0.85rem; color:var(--text-light); margin: 0.5rem 0;">${i.isi}</p>
+                    <div style="text-align: right;">
+                        <button class="btn-action btn-edit" onclick="editRecord('info','${i.id}')"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn-action btn-delete" onclick="deleteRecord('info','${i.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('admin-info-list').innerHTML = html || '<p>Belum ada maklumat rilis.</p>';
+        }
+
+        document.getElementById('src-kamar').addEventListener('input', renderKamarTable);
+        document.getElementById('src-penghuni').addEventListener('input', renderPenghuniTable);
+        document.getElementById('src-bayar').addEventListener('input', renderBayarTable);
+
+        // --- CRUD FORM MAKER ---
+        const modal = document.getElementById('crud-modal');
+        const fieldsArea = document.getElementById('dynamic-fields-container');
+
+        function openCrudForm(type) {
+            document.getElementById('form-target-type').value = type;
+            document.getElementById('form-target-id').value = '';
+            document.getElementById('dynamic-form-core').reset();
+            document.getElementById('modal-form-title').innerText = "Form Entri " + type.toUpperCase();
+            
+            let fHtml = '';
+            if(type === 'kamar') {
+                fHtml = `
+                    <div class="form-group"><label>Nomor Urut Kamar (Misal: Mawar 21)</label><input type="text" id="fk-no" class="form-control" required></div>
+                    <div class="form-group"><label>Blok Klaster</label><select id="fk-blok" class="form-control"><option value="Mawar">Mawar</option><option value="Melati">Melati</option><option value="Lily">Lily</option><option value="Edelweiss">Edelweiss</option><option value="Anggrek">Anggrek</option></select></div>
+                    <div class="form-group"><label>Tipe Kamar</label><input type="text" id="fk-tipe" class="form-control" required value="Standard Resort Suite"></div>
+                    <div class="form-group"><label>Harga Sewa Bulanan (Rp)</label><input type="number" id="fk-harga" class="form-control" required value="1400000"></div>
+                    <div class="form-group"><label>Status Operasional</label><select id="fk-status" class="form-control"><option value="Kosong">Kosong</option><option value="Terisi">Terisi</option></select></div>
+                    <div class="form-group"><label>URL Link Foto Kamar Baru</label><input type="text" id="fk-foto" class="form-control" placeholder="Paste link foto .jpg Pinterest di sini"></div>
+                `;
+            } else if(type === 'penghuni') {
+                let optKmr = storage.kamar.map(k => `<option value="${k.nomor}">${k.nomor} (${k.status})</option>`).join('');
+                fHtml = `
+                    <div class="form-group"><label>Nama Lengkap Penghuni</label><input type="text" id="fp-nama" class="form-control" required></div>
+                    <div class="form-group"><label>Nomor WhatsApp HP</label><input type="text" id="fp-hp" class="form-control" required></div>
+                    <div class="form-group"><label>Jenis Kelamin</label><select id="fp-gender" class="form-control"><option value="Pria">Pria</option><option value="Wanita">Wanita</option></select></div>
+                    <div class="form-group"><label>Pilih Kamar (Kapasitas 100 Kamar)</label><select id="fp-kamar" class="form-control">${optKmr}</select></div>
+                    <div class="form-group"><label>Tanggal Masuk Hunian</label><input type="date" id="fp-masuk" class="form-control" required></div>
+                    <div class="form-group"><label>URL Tautan Foto Penghuni</label><input type="text" id="fp-foto" class="form-control" placeholder="https://..."></div>
+                `;
+            } else if(type === 'bayar') {
+                fHtml = `
+                    <div class="form-group"><label>Nama Penghuni</label><input type="text" id="fb-nama" class="form-control" required></div>
+                    <div class="form-group"><label>Nama Kamar (Misal: Mawar 3)</label><input type="text" id="fb-kamar" class="form-control" required></div>
+                    <div class="form-group"><label>Bulan Rekening Tagihan</label><input type="text" id="fb-bulan" class="form-control" placeholder="Juni 2026" required></div>
+                    <div class="form-group"><label>Nominal Bayar (Rp)</label><input type="number" id="fb-nominal" class="form-control" required></div>
+                    <div class="form-group"><label>Keterangan Bukti</label><input type="text" id="fb-bukti" class="form-control" value="Diterima Via Mobile Banking" required></div>
+                `;
+            } else if(type === 'info') {
+                fHtml = `
+                    <div class="form-group"><label>Judul Berita/Memo</label><input type="text" id="fi-judul" class="form-control" required></div>
+                    <div class="form-group"><label>Isi Memo Pengumuman</label><textarea id="fi-isi" class="form-control" rows="4" required></textarea></div>
+                `;
+            } else if(type === 'profil') {
+                fHtml = `
+                    <div class="form-group"><label>Nama Bisnis Kos</label><input type="text" id="fpr-nama" class="form-control" value="${storage.profil.nama}" required></div>
+                    <div class="form-group"><label>Alamat Kompleks</label><input type="text" id="fpr-alamat" class="form-control" value="${storage.profil.alamat}" required></div>
+                    <div class="form-group"><label>No HP / Kontak 1</label><input type="text" id="fpr-nadia" class="form-control" value="${storage.profil.nadia}" required></div>
+                    <div class="form-group"><label>No HP / Kontak 2</label><input type="text" id="fpr-tesa" class="form-control" value="${storage.profil.tesa}" required></div>
+                    <div class="form-group"><label>Teks Struktur Deskripsi</label><textarea id="fpr-desc" class="form-control" rows="4" required>${storage.profil.desc}</textarea></div>
+                `;
+            }
+            fieldsArea.innerHTML = fHtml;
+            modal.classList.add('active');
+        }
+
+        function closeCrudForm() { modal.classList.remove('active'); }
+
+        document.getElementById('dynamic-form-core').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const type = document.getElementById('form-target-type').value;
+            const id = document.getElementById('form-target-id').value;
+
+            if(type === 'kamar') {
+                let node = { id: id || 'k-'+Date.now(), nomor: document.getElementById('fk-no').value, blok: document.getElementById('fk-blok').value, tipe: document.getElementById('fk-tipe').value, harga: parseInt(document.getElementById('fk-harga').value), status: document.getElementById('fk-status').value, foto: document.getElementById('fk-foto').value };
+                if(id) { let idx = storage.kamar.findIndex(x=>x.id===id); storage.kamar[idx] = node; } else storage.kamar.push(node);
+            } else if(type === 'penghuni') {
+                let node = { id: id || 'p-'+Date.now(), nama: document.getElementById('fp-nama').value, hp: document.getElementById('fp-hp').value, gender: document.getElementById('fp-gender').value, kamar: document.getElementById('fp-kamar').value, masuk: document.getElementById('fp-masuk').value, foto: document.getElementById('fp-foto').value };
+                let kNo = document.getElementById('fp-kamar').value;
+                let kIdx = storage.kamar.findIndex(x=>x.nomor === kNo);
+                if(kIdx !== -1) storage.kamar[kIdx].status = 'Terisi';
+                if(id) { let idx = storage.penghuni.findIndex(x=>x.id===id); storage.penghuni[idx] = node; } else storage.push(node);
+            } else if(type === 'bayar') {
+                let node = { id: id || 'b-'+Date.now(), penghuni: document.getElementById('fb-nama').value, kamar: document.getElementById('fb-kamar').value, bulan: document.getElementById('fb-bulan').value, nominal: parseInt(document.getElementById('fb-nominal').value), status: 'Lunas', bukti: document.getElementById('fb-bukti').value };
+                if(id) { let idx = storage.bayar.findIndex(x=>x.id===id); storage.bayar[idx] = node; } else storage.bayar.push(node);
+            } else if(type === 'info') {
+                let node = { id: id || 'i-'+Date.now(), judul: document.getElementById('fi-judul').value, isi: document.getElementById('fi-isi').value };
+                if(id) { let idx = storage.info.findIndex(x=>x.id===id); storage.info[idx] = node; } else storage.info.push(node);
+            } else if(type === 'profil') {
+                storage.profil = { 
+                    nama: document.getElementById('fpr-nama').value, 
+                    alamat: document.getElementById('fpr-alamat').value, 
+                    nadia: document.getElementById('fpr-nadia').value,
+                    tesa: document.getElementById('fpr-tesa').value,
+                    desc: document.getElementById('fpr-desc').value 
+                };
+            }
+            commit();
+            closeCrudForm();
+        });
+
+        function editRecord(type, id) {
+            openCrudForm(type);
+            document.getElementById('form-target-id').value = id;
+            document.getElementById('modal-form-title').innerText = "Modifikasi Data " + type.toUpperCase();
+
+            if(type === 'kamar') {
+                let obj = storage.kamar.find(x=>x.id===id);
+                document.getElementById('fk-no').value = obj.nomor; document.getElementById('fk-blok').value = obj.blok; document.getElementById('fk-tipe').value = obj.tipe; document.getElementById('fk-harga').value = obj.harga; document.getElementById('fk-status').value = obj.status; document.getElementById('fk-foto').value = obj.foto || '';
+            } else if(type === 'penghuni') {
+                let obj = storage.penghuni.find(x=>x.id===id);
+                document.getElementById('fp-nama').value = obj.nama; document.getElementById('fp-hp').value = obj.hp; document.getElementById('fp-gender').value = obj.gender; document.getElementById('fp-kamar').value = obj.kamar; document.getElementById('fp-masuk').value = obj.masuk; document.getElementById('fp-foto').value = obj.foto;
+            } else if(type === 'bayar') {
+                let obj = storage.bayar.find(x=>x.id===id);
+                document.getElementById('fb-nama').value = obj.penghuni; document.getElementById('fb-kamar').value = obj.kamar; document.getElementById('fb-bulan').value = obj.bulan; document.getElementById('fb-nominal').value = obj.nominal; document.getElementById('fb-bukti').value = obj.bukti;
+            } else if(type === 'info') {
+                let obj = storage.info.find(x=>x.id===id);
+                document.getElementById('fi-judul').value = obj.judul; document.getElementById('fi-isi').value = obj.isi;
+            }
+        }
+
+        function deleteRecord(type, id) {
+            if(confirm('Hapus berkas data record ini?')) {
+                if(type === 'kamar') storage.kamar = storage.kamar.filter(x=>x.id!==id);
+                else if(type === 'penghuni') {
+                    let p = storage.penghuni.find(x=>x.id===id);
+                    if(p) { let kIdx = storage.kamar.findIndex(k=>k.nomor === p.kamar); if(kIdx !== -1) storage.kamar[kIdx].status = 'Kosong'; }
+                    storage.penghuni = storage.penghuni.filter(x=>x.id!==id);
+                }
+                else if(type === 'bayar') storage.bayar = storage.bayar.filter(x=>x.id!==id);
+                else if(type === 'info') storage.info = storage.info.filter(x=>x.id!==id);
+                commit();
+            }
+        }
+
+        commit();
+    </script>
+</body>
+</html>
